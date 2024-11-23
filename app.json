@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FoodOrdering",
-    "slug": "FoodOrdering",
+    "slug": "foodordering",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -41,8 +41,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "bb239642-782f-4b0f-b99c-ffda6ec2cd65"
+        "projectId": "2545656a-5022-446b-b9ac-ef4fa9211041"
       }
-    }
+    },
+    "owner": "mint11"
   }
 }

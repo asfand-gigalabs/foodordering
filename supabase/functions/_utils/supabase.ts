@@ -1,42 +1,30 @@
 import 'react-native-url-polyfill/auto'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+// import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { stripe } from './stripe.ts';
+import { SUPABASE_URL, SUPABASE_KEY } from '@env';
 
-console.log('process.env.EXPO_PUBLIC_SUPABASE_URL: ', process.env.EXPO_PUBLIC_SUPABASE_URL);
-
-export const supabase = createClient(
-  process.env.EXPO_PUBLIC_SUPABASE_URL || "",
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "",
-  {
-    auth: {
-      storage: AsyncStorage,
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: false,
-    },
-  })
 export const createOrRetrieveProfile = async (req: Request) => {
-  // const supabaseClient = createClient(
-  //   Deno.env.get('SUPABASE_URL') ?? '',
-  //   Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-  //   {
-  //     global: {
-  //       headers: { Authorization: req.headers.get('Authorization')! },
-  //     },
-  //   }
-  // );
   const supabaseClient = createClient(
-    process.env.EXPO_PUBLIC_SUPABASE_URL || "",
-    process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "",
+    SUPABASE_URL ?? '',
+    SUPABASE_KEY?? '',
     {
-      auth: {
-        storage: AsyncStorage,
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: false,
+      global: {
+        headers: { Authorization: req.headers.get('Authorization')! },
       },
-    })
+    }
+  );
+  // const supabaseClient = createClient(
+  //   process.env.EXPO_PUBLIC_SUPABASE_URL || "",
+  //   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "",
+  //   {
+  //     auth: {
+  //       storage: AsyncStorage,
+  //       autoRefreshToken: true,
+  //       persistSession: true,
+  //       detectSessionInUrl: false,
+  //     },
+  //   })
   
   // Now we can get the session or user object
   const {
